@@ -33,15 +33,18 @@ def normalize(input_string):
              >>> tp.normalize(input_string2)
              'extra space'
     """
+    # 입력 받은 문자열 trim 및 소문자화 
     temp_string = input_string.strip().lower()
-    if temp_string:
-        normalized_string = temp_string[0]
-        for letter in temp_string[1:]:
-            if letter.isspace() and normalized_string[-1].isspace():
-                continue
-            normalized_string += letter
-        return normalized_string
-    return ""
+    # 입력이 없는 경우 빈문자열 반환
+    if not temp_string:
+        return ""
+    normalized_string = temp_string[0]  # 첫 문자를 넣고
+    for letter in temp_string[1:]:
+        # 현재와 그 전 문자가 space인 경우는 패스
+        if letter.isspace() and normalized_string[-1].isspace():
+            continue
+        normalized_string += letter
+    return normalized_string
 
 
 def no_vowels(input_string):
@@ -65,6 +68,6 @@ def no_vowels(input_string):
             >>> tp.normalize(input_string2)
             ''W lv Pythn!'
     """
-    drop = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+    drop = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']   # 제거할 문자
     no_vowel_string = ''.join(filter(lambda x: x not in drop, input_string))
     return no_vowel_string
